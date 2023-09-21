@@ -4,6 +4,7 @@ namespace najprojektik.Models
 {
     public class ApplicationUser : IdentityUser
     {
-
-    }
+        public string guild {  get; set; }
+        public int xp { get; set; }
+    }   
 }
