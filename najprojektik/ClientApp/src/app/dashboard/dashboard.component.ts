@@ -6,18 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 
-interface User {
-  xp: number;
-  guild: string;
-}
+
 
 export class DashboardComponent {
-
-  user: User = {
-    xp: 100,
-    guild: 'Adventurers'
-  };
-
 
 
 }
