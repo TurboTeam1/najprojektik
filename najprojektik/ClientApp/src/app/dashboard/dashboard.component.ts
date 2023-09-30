@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +10,18 @@ import { Component } from '@angular/core';
 
 
 export class DashboardComponent {
+  public userinfo: DTO;
+
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    http.get<&DTO>(baseUrl + 'users').subscribe(result => {
+      this.userinfo = result;
+    }, error => console.error(error));
+  }
+
+}
 
 
+interface DTO {
+  Xp: number;
+  Guild : string;
 }
