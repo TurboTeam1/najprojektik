@@ -16,10 +16,10 @@ namespace najprojektik.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+     /*   [HttpGet]
         public IEnumerable<DTO> Get()
         {
             return X;
-        }
+        }*/
     }
 }
