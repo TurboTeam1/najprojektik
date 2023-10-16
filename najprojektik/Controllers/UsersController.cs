@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace najprojektik.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -16,10 +16,10 @@ namespace najprojektik.Controllers
             _logger = logger;
         }
 
-     /*   [HttpGet]
-        public IEnumerable<DTO> Get()
+        [HttpGet]
+        public DTO Get()
         {
-            return X;
-        }*/
+            return new DTO { Guild = "student", Xp = 20 } ;
+        }
     }
 }
