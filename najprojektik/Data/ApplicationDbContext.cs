@@ -13,5 +13,7 @@ namespace najprojektik.Data
         {
 
         }
+
+        public DbSet<Guilds> Guild { get; set; } = default;
     }
 }
