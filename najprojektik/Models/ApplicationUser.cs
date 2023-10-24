@@ -6,5 +6,7 @@ namespace najprojektik.Models
     {
         public string? guild {  get; set; }
         public int Xp { get; set; }
+
+        public Guilds? Guilds { get; set; }
     }   
 }

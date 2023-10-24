@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using najprojektik;
 using najprojektik.Data;
 using najprojektik.Models;
 using System.Security.Claims;
@@ -19,13 +21,14 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<ApplicationUser> Get()
+    public ActionResult<DTO> Get()
     {
         var currentUser = GetCurrentUser();
 
-        var info = new ApplicationUser
+        var info = new DTO
         {
-            Xp = currentUser.Xp
+            Xp = currentUser.Xp,
+            Guild = currentUser.Guilds.Name
         };
 
         return info;
@@ -37,8 +40,9 @@ public class UsersController : ControllerBase
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         ApplicationUser? user = _context.Users
-             
+            .Include(user => user.Guilds)
             .SingleOrDefault(user => user.Id == userId);
+        
 
         return user!;
     }

@@ -22,6 +22,6 @@ export class DashboardComponent {
 
 
 interface DTO {
-  Xp: number;
-  Guild : string;
+  xp: number;
+  guild : string;
 }
