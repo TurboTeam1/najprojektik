@@ -8,7 +8,7 @@ using najprojektik.Models;
 using System.Security.Claims;
 
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 
 public class UsersController : ControllerBase

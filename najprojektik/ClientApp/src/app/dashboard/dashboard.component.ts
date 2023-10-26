@@ -13,7 +13,7 @@ export class DashboardComponent {
   public userinfo: DTO;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<&DTO>(baseUrl + 'api/users').subscribe(result => {
+    http.get<&DTO>(baseUrl + 'users').subscribe(result => {
       this.userinfo = result;
     }, error => console.error(error));
   }
