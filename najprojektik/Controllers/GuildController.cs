@@ -21,11 +21,11 @@ public class GuildController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Guilds> GetGuildInformation()
+    public IEnumerable<GuildDto> GetGuildInformation()
     {
         IEnumerable<Guilds> dbGuilds = _context.Guild;
 
-        return dbGuilds.Select(dbGuilds => new Guilds
+        return dbGuilds.Select(dbGuilds => new GuildDto
         {
             Id = dbGuilds.Id,
             Name = dbGuilds.Name,
