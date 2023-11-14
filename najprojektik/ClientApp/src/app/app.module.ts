@@ -15,6 +15,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {GuildComponent } from './guild/guild.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { GuildDetailComponent } from './guild-detail/guild-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     CounterComponent,
     FetchDataComponent,
     DashboardComponent,
-    GuildComponent
+    GuildComponent,
+    GuildDetailComponent
 
   ],
   imports: [
@@ -38,6 +40,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: "Dashboard", component: DashboardComponent },
       { path: "guild", component: GuildComponent },
+      { path: "guild-detail", component: GuildDetailComponent },
+
 
     ]),
     NoopAnimationsModule
