@@ -1,6 +1,6 @@
 .accordion {
   background-color: transparent;
-  font-family: PrintBold-J5o;
+  font-family: 'Comic Sans MS';
 }
 
 .accordion-item {
@@ -8,9 +8,6 @@
   color: gray;
   font-size: 1.4rem;
 }
-
-
-
 
 .accordion-button {
   background-color: #141414;
@@ -21,41 +18,41 @@
 .tlacitko {
   border-style: double;
   border-color: #252525;
-  rotate: 5deg;
-  border-radius: 0.5rem;
-  border-width: 0.2rem;
-  color: #141414;
+  rotate: 0deg;
+  border-radius: 0.4rem;
+  border-width: 0.3rem;
+  color: #ffffff;
 }
 
-@keyframes lgbt {
+@keyframes gec {
   0% {
     background-color: red;
   }
 
   20% {
-    background-color: orange;
+    background-color: blue;
   }
 
   40% {
-    background-color: yellow;
+    background-color: red;
   }
 
   60% {
-    background-color: lawngreen;
+    background-color: blue;
   }
 
   80% {
-    background-color: darkslateblue;
+    background-color: red;
   }
 
   100% {
-    background-color: purple;
+    background-color: blue;
   }
 }
 
-.timko {
-  animation-name: lgbt;
-  animation-duration: 4s;
+.stikatko1 {
+  animation-name: gec;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
