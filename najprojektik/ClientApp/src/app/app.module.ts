@@ -42,7 +42,6 @@ import { GuildDetailComponent } from './guild-detail/guild-detail.component';
       { path: "guild", component: GuildComponent },
       { path: "guilds/:id", component: GuildDetailComponent },
 
-
     ]),
     NoopAnimationsModule
   ],

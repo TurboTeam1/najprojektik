@@ -42,5 +42,27 @@ public class GuildController : ControllerBase
 
         return users.Where(u => u.Guilds.Id == guildId).Count();
     }
+    [HttpGet]
+    [Route("getGuildById")]
+    public GuildDto GetGuildById(int id)
+    {
+        Guilds guild = _context.Guild.Where(guild => guild.Id == id).FirstOrDefault();
 
+        if (guild != null)
+        {
+            return new GuildDto
+            {
+                Id = guild.Id,
+                Name = guild.Name,
+                Description = guild.Description,
+                MaxMembers = guild.MaxMembers,
+                MembersCount = GetguildMembersCount(guild.Id)
+            };
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
+
