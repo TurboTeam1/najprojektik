@@ -36,7 +36,9 @@ export class GuildDetailComponent {
   }
 
 
+
 }
+
 
 
 
@@ -48,3 +50,5 @@ interface GuildDto {
   membersCount: number;
 
 }
+
+

@@ -26,27 +26,27 @@
 
 @keyframes gec {
   0% {
-    background-color: red;
+    background-color: cornflowerblue;
   }
 
   20% {
-    background-color: blue;
+    background-color: cornflowerblue;
   }
 
   40% {
-    background-color: red;
+    background-color: cornflowerblue;
   }
 
   60% {
-    background-color: blue;
+    background-color: cornflowerblue;
   }
 
   80% {
-    background-color: red;
+    background-color: cornflowerblue;
   }
 
   100% {
-    background-color: blue;
+    background-color: cornflowerblue;
   }
 }
 

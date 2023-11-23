@@ -12,7 +12,7 @@ export class GuildService {
   GetInfoAboutGuild(id: number) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("id", id);
-    return this.http.get<GuildDto>(this.baseUrl + 'guilds/getGuildById', {params: queryParams});
+    return this.http.get<GuildDto>(this.baseUrl + 'guild/getGuildById', {params: queryParams});
       
   }
 }
