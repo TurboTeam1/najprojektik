@@ -40,8 +40,6 @@ export class GuildDetailComponent {
 }
 
 
-
-
 interface GuildDto {
   name: string;
   id: number;
