@@ -1,3 +1,8 @@
 <p>guild-detail works!</p>
 
-
+<div *ngIf="guild">
+  <h1>{{ guild.name }}</h1>
+  <p>{{ guild.description }}</p>
+  <p>Members: {{ guild.membersCount }} / {{ guild.maxMembers }}</p>
+  <a class="btn btn-primary" [routerLink]="['/guild']">Back to Guild List</a>
+</div>

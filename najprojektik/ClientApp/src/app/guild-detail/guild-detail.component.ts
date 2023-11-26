@@ -18,7 +18,6 @@ export class GuildDetailComponent {
 
 
 
-
   constructor(
     private route: ActivatedRoute,
     http: HttpClient,
@@ -34,9 +33,6 @@ export class GuildDetailComponent {
     this.mojgec = Number(RouteParams.get('id'));
     this.guildService.GetInfoAboutGuild(this.mojgec).subscribe(guild => { this.guild = guild });
   }
-
-
-
 }
 
 
@@ -48,5 +44,3 @@ interface GuildDto {
   membersCount: number;
 
 }
-
-
