@@ -7,16 +7,17 @@ import { Router } from '@angular/router';
   selector: 'app-guild',
   templateUrl: './guild.component.html',
   styleUrls: ['./guild.component.css'],
-
-
 })
 
 
 export class GuildComponent {
 
+  Name: string = "no data";
+  Description: string = "no data";
+  MaxMembers: number = 0;
+  MembersCount: number = 0;
 
   public GuildData: GuildDto[] = [];
-  panelOpenState = false;
 
   constructor(
     http: HttpClient,
@@ -39,5 +40,5 @@ interface GuildDto {
   description: string;
   maxMembers: number;
   membersCount: number;
-
+  userId?: number;
 }
