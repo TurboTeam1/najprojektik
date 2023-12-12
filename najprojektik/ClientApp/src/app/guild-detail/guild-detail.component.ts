@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, signal, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GuildService } from '../guild.service';
 import { inject } from '@angular/core/testing';
 import { getBaseUrl } from '../../main';
+
+
 
 
 @Component({
@@ -11,53 +13,44 @@ import { getBaseUrl } from '../../main';
   templateUrl: './guild-detail.component.html',
   styleUrls: ['./guild-detail.component.css']
 })
-export class GuildDetailComponent implements OnInit{
+export class GuildDetailComponent implements OnInit {
 
- mojgec: number = 0;
- guild: GuildDto | undefined;
- guildUsers: DTO[];
+  guildIdFromRoute: number = 0;
+  guildDetailInfo = signal<GuildDetailDto>(undefined);
 
   constructor(
     private route: ActivatedRoute,
-    http: HttpClient,
     private guildService: GuildService,
-    @Inject('BASE_URL') baseUrl: string
-
   ) {
-    this.guild = {} as GuildDto;
-
   }
   ngOnInit(): void {
     const RouteParams = this.route.snapshot.paramMap;
-    this.mojgec = Number(RouteParams.get('id'));
+    this.guildIdFromRoute = Number(RouteParams.get('id'));
     console.log(RouteParams)
-    this.guildService.getInfoAboutGuild(this.mojgec).subscribe(guild => { this.guild = guild ;
-
-    this.guildService.getUsersInCertainGuild(this.mojgec).subscribe(result => { this.guildUsers = result;
-    }, error => console.error(error));
-    });
+    this.guildService.getInfoAboutGuild(this.guildIdFromRoute).subscribe(guildDetail => { this.guildDetailInfo.set(guildDetail); });
   }
   OnJoin() {
-    this.guildService.joinGuild(this.mojgec).subscribe();
-    location.reload();
+    this.guildService.joinGuild(this.guildIdFromRoute).subscribe(guildDetail => { this.guildDetailInfo.set(guildDetail); });
   }
   OnLeave() {
-    this.guildService.leaveGuild();
-    location.reload();
+    this.guildService.leaveGuild(this.guildIdFromRoute).subscribe(guildDetail => { this.guildDetailInfo.set(guildDetail); });
+
+
   }
 }
 
-interface GuildDto {
+interface UserDto {
+  userName: string;
+  xp: number;
+  email: string;
+  guild: string;
+}
+
+interface GuildDetailDto {
   name: string;
   id: number;
   description: string;
   maxMembers: number;
   membersCount: number;
-
-}
-interface DTO {
-  userName: string;
-  xp: number;
-  email: string;
-  guild: string;
+  users: UserDto[];
 }

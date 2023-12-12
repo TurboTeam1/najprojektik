@@ -6,6 +6,7 @@ using najprojektik;
 using najprojektik.Data;
 using najprojektik.Models;
 using System.Security.Claims;
+using najprojektik.DTO_s;
 
 
 [Route("[controller]")]
@@ -44,19 +45,20 @@ public class GuildController : ControllerBase
     }
     [HttpGet]
     [Route("getGuildById")]
-    public GuildDto GetGuildById(int id)
+    public GuildDetailDto GetGuildById(int id)
     {
         Guilds guild = _context.Guild.Where(guild => guild.Id == id).FirstOrDefault();
 
         if (guild != null)
         {
-            return new GuildDto
+            return new GuildDetailDto
             {
                 Id = guild.Id,
                 Name = guild.Name,
                 Description = guild.Description,
                 MaxMembers = guild.MaxMembers,
-                MembersCount = GetguildMembersCount(guild.Id)
+                MembersCount = GetguildMembersCount(guild.Id),
+                Users = MapUserToDto(guild.Id)
             };
         }
         else
@@ -64,5 +66,21 @@ public class GuildController : ControllerBase
             return null;
         }
     }
+    public IEnumerable<UserDto> MapUserToDto(int id)
+    {
+        return _context.Users
+            .Include(user => user.Guilds)
+            .Where(user => user.Guilds.Id == id)
+            .Select(user => new UserDto
+            {
+                Guild = user.Guilds.Name,
+                UserName = user.UserName,
+                Email = user.Email,
+                Xp = user.Xp
+            });
+    }
+
 }
+
+
 

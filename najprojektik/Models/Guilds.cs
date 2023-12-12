@@ -10,7 +10,6 @@ namespace najprojektik.Models
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int MaxMembers { get; set; }
-        public int MembersCount { get; set; } = default!;
 
         public ICollection<ApplicationUser> Members { get; } = new List<ApplicationUser>();
     }

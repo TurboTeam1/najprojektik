@@ -10,10 +10,10 @@ import { Component, Inject } from '@angular/core';
 
 
 export class DashboardComponent {
-  public userinfo: DTO;
+  public userinfo: UserDto;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<&DTO>(baseUrl + 'users').subscribe(result => {
+    http.get<&UserDto>(baseUrl + 'users').subscribe(result => {
       this.userinfo = result;
     }, error => console.error(error));
   }
@@ -21,7 +21,7 @@ export class DashboardComponent {
 }
 
 
-interface DTO {
+interface UserDto {
   xp: number;
   guild : string;
 }

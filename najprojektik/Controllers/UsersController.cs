@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using najprojektik;
 using najprojektik.Data;
+using najprojektik.DTO_s;
 using najprojektik.Models;
 using System.Security.Claims;
 
@@ -22,10 +23,10 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<DTO> Get()
+    public ActionResult<UserDto> Get()
     {
         var currentUser = GetCurrentUser();
-        var info = new DTO
+        var info = new UserDto
         {
             Xp = currentUser.Xp,
             Guild = currentUser.Guilds.Name,
@@ -35,25 +36,44 @@ public class UsersController : ControllerBase
 
     }
 
-private ApplicationUser GetCurrentUser()
+    private ApplicationUser GetCurrentUser()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         ApplicationUser? user = _context.Users
             .Include(user => user.Guilds)
             .SingleOrDefault(user => user.Id == userId);
-        
+
 
         return user!;
     }
+    private int GetguildMembersCount(int guildId)
+    {
+        IQueryable<ApplicationUser> users = _context.Users.Include(applicationUser => applicationUser.Guilds).AsNoTracking();
 
+        return users.Where(u => u.Guilds.Id == guildId).Count();
+    }
+
+    public IEnumerable<UserDto> MapUserToDto(int id)
+    {
+        return _context.Users
+            .Include(user => user.Guilds)
+            .Where(user => user.Guilds.Id == id)
+            .Select(user => new UserDto
+            {
+                Guild = user.Guilds.Name,
+                UserName = user.UserName,
+                Email = user.Email,
+                Xp = user.Xp
+            });
+    }
 
     [HttpPut]
     [Route("joinGuild")]
-    public async Task<IActionResult> JoinGuild(int id)
+    public ActionResult JoinGuild(int id)
     {
         var currentUser = GetCurrentUser();
-        var newGuild = await _context.Guild.FindAsync(id);
+        var newGuild = _context.Guild.Find(id);
 
         if (newGuild == null)
         {
@@ -61,37 +81,55 @@ private ApplicationUser GetCurrentUser()
         }
 
         currentUser.Guilds = newGuild;
-        await _context.SaveChangesAsync();
+        _context.SaveChanges();
 
-        return NoContent();
+        return Ok(
+            new GuildDetailDto
+            {
+                Id = newGuild.Id,
+                Name = newGuild.Name,
+                Description = newGuild.Description,
+                MaxMembers = newGuild.MaxMembers,
+                MembersCount = GetguildMembersCount(newGuild.Id),
+                Users = MapUserToDto(newGuild.Id)
+            });
     }
 
 
     [HttpPut]
     [Route("leaveGuild")]
-    public async Task<IActionResult> LeaveGuild()
+    public ActionResult LeaveGuild(int id)
     {
         var currentUser = GetCurrentUser();
-
+        var newGuild = _context.Guild.Find(id);
         if (currentUser.Guilds == null)
         {
             return NotFound();
         }
 
         currentUser.Guilds = null;
-        await _context.SaveChangesAsync();
+        _context.SaveChanges();
 
-        return NoContent();
+        return Ok(
+            new GuildDetailDto
+            {
+                Id = newGuild.Id,
+                Name = newGuild.Name,
+                Description = newGuild.Description,
+                MaxMembers = newGuild.MaxMembers,
+                MembersCount = GetguildMembersCount(newGuild.Id),
+                Users = MapUserToDto(newGuild.Id)
+            });
     }
 
     [HttpGet]
     [Route("getUsersInGuild")]
-    public IEnumerable<DTO> GetGuildById(int id)
+    public IEnumerable<UserDto> GetGuildById(int id)
     {
         return _context.Users
             .Include(user => user.Guilds)
             .Where(user => user.Guilds.Id == id)
-            .Select(user => new DTO
+            .Select(user => new UserDto
             {
                 Guild = user.Guilds.Name,
                 UserName = user.UserName,

@@ -1,19 +1,19 @@
 <p>guild-detail works!</p>
 
 
-<div *ngIf="guild">
-  <h1>{{ guild.name }}</h1>
-  <p>{{ guild.description }}</p>
-  <p>Members: {{ guild.membersCount }} / {{ guild.maxMembers }}</p>
+<div>
+  <h1>{{ guildDetailInfo().name }}</h1>
+  <p>{{ guildDetailInfo().description }}</p>
+  <p>Members: {{ guildDetailInfo().membersCount }} / {{ guildDetailInfo().maxMembers }}</p>
   <table id="customers">
     <tr>
       <th>Name</th>
       <th>E-mail</th>
       <th>XP</th>
     </tr>
-    <tr *ngFor="let user of guildUsers">
+    <tr *ngFor="let user of guildDetailInfo().users">
       <td>{{user.userName}}</td>
-      <td>({{user.email}})</td>
+      <td>{{user.email}}</td>
       <td>{{user.xp}}</td>
     </tr>
   </table>
