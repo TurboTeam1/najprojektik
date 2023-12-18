@@ -25,8 +25,7 @@ import { GuildDetailComponent } from './guild-detail/guild-detail.component';
     CounterComponent,
     FetchDataComponent,
     DashboardComponent,
-    GuildComponent,
-    GuildDetailComponent
+    GuildDetailComponent,
 
   ],
   imports: [

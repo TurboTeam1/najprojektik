@@ -1,20 +1,38 @@
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item" *ngFor="let guild of GuildData; let i = index">
-    <h2 class="accordion-header" [attr.id]="'heading' + i">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" [attr.aria-controls]="'#collapse' + i">
-        <strong>{{ guild.name }}</strong>&nbsp; {{ guild.membersCount }}/{{ guild.maxMembers }}
-        <div></div>
-      </button>
-    </h2>
-    <div [attr.id]="'collapse' + i" class="accordion-collapse collapse" [attr.aria-labelledby]="'#heading' + i" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <button class="tlacitko stikatko1" [routerLink]="['/guilds', guild.id]">
-          DETAILS
-        </button>  <br />
+<form [formGroup]="guildForm" (ngSubmit)="onSubmit()">
+
+  <label for="guildName">Guild Name: </label>
+  <input id="guildName" type="text" formControlName="guildName">
+
+  <label for="membersCount">Members Count: </label>
+  <input id="membersCount" type="number" min="0" formControlName="membersCount">
+
+  <label for="guildDescription">Guild Description: </label>
+  <input id="guildDescription" type="text" formControlName="guildDescription">
+
+  <p>Complete the form to enable button.</p>
+  <button type="submit" [disabled]="!guildForm.valid">Submit</button>
+
+</form>
 
 
-        {{guild.description}}
+
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item" *ngFor="let guild of GuildData; let i = index">
+      <h2 class="accordion-header" [attr.id]="'heading' + i">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" [attr.aria-controls]="'#collapse' + i">
+          <strong>{{ guild.name }}</strong>&nbsp; {{ guild.membersCount }}/{{ guild.maxMembers }}
+          <div></div>
+        </button>
+      </h2>
+      <div [attr.id]="'collapse' + i" class="accordion-collapse collapse" [attr.aria-labelledby]="'#heading' + i" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <button class="button" [routerLink]="['/guilds', guild.id]">
+            DETAILS
+          </button>  <br />
+
+
+          {{guild.description}}
+        </div>
       </div>
     </div>
   </div>
-</div>
