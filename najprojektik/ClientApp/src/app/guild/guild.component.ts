@@ -1,8 +1,15 @@
-import { Component, Inject, Injectable} from '@angular/core';
+import { Component, Inject, Injectable, signal} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router,RouterModule, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
+
+
+
+@Injectable({
+  providedIn: 'root'
+})
 
 
 @Component({
@@ -10,7 +17,7 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
   selector: 'app-guild',
   templateUrl: './guild.component.html',
   styleUrls: ['./guild.component.css'],
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
 })
 
 

@@ -26,9 +26,9 @@
       </h2>
       <div [attr.id]="'collapse' + i" class="accordion-collapse collapse" [attr.aria-labelledby]="'#heading' + i" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-          <button class="button" [routerLink]="['/guilds', guild.id]">
+          <a class="button" [routerLink]="['/guilds', guild.id]">
             DETAILS
-          </button>  <br />
+          </a>  <br />
 
 
           {{guild.description}}
