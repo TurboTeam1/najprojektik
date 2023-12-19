@@ -2,12 +2,15 @@
 
   <label for="guildName">Guild Name: </label>
   <input id="guildName" type="text" formControlName="guildName">
+  <br />
 
   <label for="membersCount">Members Count: </label>
   <input id="membersCount" type="number" min="0" formControlName="membersCount">
+  <br />
 
   <label for="guildDescription">Guild Description: </label>
   <input id="guildDescription" type="text" formControlName="guildDescription">
+  <br />
 
   <p>Complete the form to enable button.</p>
   <button type="submit" [disabled]="!guildForm.valid">Submit</button>

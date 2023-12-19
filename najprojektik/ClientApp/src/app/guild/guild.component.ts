@@ -55,7 +55,11 @@ export class GuildComponent {
     // TODO: Use EventEmitter with form value
     console.warn(this.guildForm.value);
   }
+ // http.get<
 }
+
+
+
 
 
 
