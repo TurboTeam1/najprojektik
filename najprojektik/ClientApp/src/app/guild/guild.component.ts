@@ -42,9 +42,6 @@ export class GuildComponent {
     private router: Router,
     @Inject('BASE_URL') baseUrl: string,
   )
-
-
-
   {
     http.get<GuildDto[]>(baseUrl + 'guild').subscribe(result => {
       this.GuildData = result;

@@ -34,7 +34,7 @@ export class GuildDetailComponent implements OnInit {
   }
   OnLeave() {
     this.guildService.leaveGuild(this.guildIdFromRoute).subscribe(guildDetail => { this.guildDetailInfo.set(guildDetail); });
-
+  
 
   }
 }
