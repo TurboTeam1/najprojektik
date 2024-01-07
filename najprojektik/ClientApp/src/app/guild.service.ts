@@ -24,11 +24,11 @@ export class GuildService {
     queryParams = queryParams.append("id", id);
     return this.http.put<GuildDetailDto>(this.baseUrl + 'users/leaveGuild', null, { params: queryParams })
   }
-  guildForums(id: number) {
-    let queryParams = new HttpParams();
-    queryParams = queryParams.append("id", id);
-    return this.http.put<CreateGuildInfo>(this.baseUrl + '', {params: queryParams})
+  createGuildForum(Data:GuildFormDto) { 
+
+    return this.http.post<GuildFormDto>(this.baseUrl + 'guild/createGuild', Data );
   }
+
 }
 
 interface UserDto {
@@ -48,5 +48,5 @@ interface GuildDetailDto {
 interface GuildFormDto {
   guildName: string; 
   guildDescription: string; 
-  membersCount: number;
+  membersCount: string;
 }

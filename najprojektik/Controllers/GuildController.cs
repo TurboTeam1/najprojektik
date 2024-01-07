@@ -80,6 +80,22 @@ public class GuildController : ControllerBase
             });
     }
 
+
+    [HttpPost]
+    [Route("createGuild")]
+    public createGuildInfo createGuildForm(createGuildInfo guild)
+    {
+        var guildCreate = new Guilds()
+        {
+            Description = guild.guildDescription,
+            Name = guild.guildName,
+            MaxMembers = guild.membersCount
+        };
+        _context.Add(guildCreate);
+        _context.SaveChanges();
+        return guild;
+    } 
+    
 }
 
 
