@@ -81,7 +81,7 @@ public class GuildController : ControllerBase
     }
 
 
-    [HttpPost]
+    [HttpPut]
     [Route("createGuild")]
     public createGuildInfo createGuildForm(createGuildInfo guild)
     {
@@ -94,8 +94,17 @@ public class GuildController : ControllerBase
         _context.Add(guildCreate);
         _context.SaveChanges();
         return guild;
-    } 
-    
+    }
+    [HttpDelete]
+    [Route("id")]
+    public GuildDetailDto removeGuild(int id)
+
+    {
+        var fullguild = _context.Guild.Where(x  => x.Id == id).Single<Guilds>();
+        _context.Remove(fullguild);
+        _context.SaveChanges();
+        return null;
+    }
 }
 
 

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, signal, } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GuildService } from '../guild.service';
 import { inject } from '@angular/core/testing';
 import { getBaseUrl } from '../../main';
+
 
 
 
@@ -17,6 +18,7 @@ export class GuildDetailComponent implements OnInit {
 
   guildIdFromRoute: number = 0;
   guildDetailInfo = signal<GuildDetailDto>(undefined);
+  private router: Router;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,10 +36,12 @@ export class GuildDetailComponent implements OnInit {
   }
   OnLeave() {
     this.guildService.leaveGuild(this.guildIdFromRoute).subscribe(guildDetail => { this.guildDetailInfo.set(guildDetail); });
-  
-
+  }
+  OnDelete() {
+    this.guildService.deleteGuild(this.guildIdFromRoute).pipe().subscribe((response) => this.router.navigateByUrl('/guild'));
   }
 }
+
 
 interface UserDto {
   userName: string;

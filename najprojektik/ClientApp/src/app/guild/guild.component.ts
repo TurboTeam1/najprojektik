@@ -8,7 +8,6 @@ import { Subject, takeUntil } from 'rxjs';
 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -60,7 +59,7 @@ export class GuildComponent {
        guildName: this.guildForm.controls['guildName'].value,
        guildDescription: this.guildForm.controls['guildDescription'].value,
        membersCount: this.guildForm.controls['membersCount'].value
-     }).pipe(takeUntil(this.destroy$)).subscribe();
+     }).pipe(takeUntil(this.destroy$)).subscribe(guildDetail => { this.newGuild.set(guildDetail); });
     }
     else {
       console.warn();

@@ -26,9 +26,14 @@ export class GuildService {
   }
   createGuildForum(Data:GuildFormDto) { 
 
-    return this.http.post<GuildFormDto>(this.baseUrl + 'guild/createGuild', Data );
+    return this.http.put<GuildFormDto>(this.baseUrl + 'guild/createGuild', Data );
   }
-
+  deleteGuild(id: number) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("id", id);
+    return this.http.delete(this.baseUrl + 'guild/id', { params: queryParams });
+      
+  }
 }
 
 interface UserDto {
