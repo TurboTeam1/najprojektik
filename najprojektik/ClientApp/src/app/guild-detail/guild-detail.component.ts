@@ -18,11 +18,11 @@ export class GuildDetailComponent implements OnInit {
 
   guildIdFromRoute: number = 0;
   guildDetailInfo = signal<GuildDetailDto>(undefined);
-  private router: Router;
 
   constructor(
     private route: ActivatedRoute,
     private guildService: GuildService,
+    private router: Router
   ) {
   }
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class GuildDetailComponent implements OnInit {
     this.guildService.leaveGuild(this.guildIdFromRoute).subscribe(guildDetail => { this.guildDetailInfo.set(guildDetail); });
   }
   OnDelete() {
-    this.guildService.deleteGuild(this.guildIdFromRoute).pipe().subscribe((response) => this.router.navigateByUrl('/guild'));
+    this.guildService.deleteGuild(this.guildIdFromRoute).pipe().subscribe((response) => this.router.navigateByUrl('guild'));
   }
 }
 
