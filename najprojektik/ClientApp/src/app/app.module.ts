@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {GuildComponent } from './guild/guild.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GuildDetailComponent } from './guild-detail/guild-detail.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { GuildDetailComponent } from './guild-detail/guild-detail.component';
     FetchDataComponent,
     DashboardComponent,
     GuildDetailComponent,
+    SearchFilterPipe
 
   ],
   imports: [
@@ -44,9 +46,12 @@ import { GuildDetailComponent } from './guild-detail/guild-detail.component';
     ]),
     NoopAnimationsModule
   ],
+  exports: [SearchFilterPipe],
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,10 +1,11 @@
-import { Component, Inject, Injectable, signal} from '@angular/core';
+import { Component, Inject, Injectable, signal, Pipe, PipeTransform} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router,RouterModule, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GuildService } from '../guild.service';
 import { Subject, takeUntil } from 'rxjs';
+import { SearchFilterPipe } from 'src/app/search-filter.pipe';
 
 
 
@@ -17,7 +18,10 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-guild',
   templateUrl: './guild.component.html',
   styleUrls: ['./guild.component.css'],
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, FormsModule],
+  providers: [SearchFilterPipe]
+
+  
 })
 
 export class GuildComponent {
@@ -33,12 +37,17 @@ export class GuildComponent {
   public GuildData: GuildDto[];
   newGuild = signal<GuildFormDto>(undefined);
 
+  items: GuildDto[] = [];
+  searchTerm: string = '';
+  filteredItems: GuildDto[] = [];
+
   constructor(
     private route: ActivatedRoute,
     http: HttpClient,
     private router: Router,
     @Inject('BASE_URL') baseUrl: string,
     private guildService: GuildService,
+    private searchFilterPipe: SearchFilterPipe,
   ) 
   {
     this.guildForm = new FormGroup({
@@ -64,12 +73,17 @@ export class GuildComponent {
     else {
       console.warn();
     }
-    }
+  }
+
+  //onSearchChange(event: GuildDto) {
+  //  this.searchTerm = event.target.value;
+  //  this.filteredItems = this.searchFilterPipe.transform(this.items, this.searchTerm);
+  ///}
   }
 
 
 
-interface GuildDto {
+export interface GuildDto {
   name: string;
   id: number;
   description: string;
