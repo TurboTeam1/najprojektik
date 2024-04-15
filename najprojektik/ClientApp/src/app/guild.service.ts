@@ -8,7 +8,7 @@ import { Inject, Injectable } from '@angular/core';
 export class GuildService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-  }
+  } 
   getInfoAboutGuild(id: number) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("id", id);
